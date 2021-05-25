@@ -9,7 +9,7 @@ import { ICat, LikedCat } from '../interfaces';
  * @returns 
  * @author jlee
  */
-const CatImage : FC<{ cat: ICat | LikedCat, onClick: (cat: ICat | LikedCat) => void }> = memo(({ cat, onClick }) => {
+const CatImage : FC<{ cat: ICat | LikedCat, onClick: (cat: ICat | LikedCat) => void, isLiked: boolean }> = memo(({ cat, onClick, isLiked }) => {
     return (
         <Image
             borderRadius="full"
@@ -17,7 +17,7 @@ const CatImage : FC<{ cat: ICat | LikedCat, onClick: (cat: ICat | LikedCat) => v
             src={cat.url}
             alt={cat.id}
             onClick={() => onClick(cat)}
-            opacity="0.5"
+            opacity={isLiked ? "1" : "0.5"}
             _hover={{ opacity: 1, cursor: 'pointer' }}
             fallbackSrc="https://via.placeholder.com/150"
         />

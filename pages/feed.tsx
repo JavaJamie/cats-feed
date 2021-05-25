@@ -1,18 +1,21 @@
 import { Box, Flex, SimpleGrid } from '@chakra-ui/layout';
 import { Button, SkeletonCircle, Spinner } from "@chakra-ui/react";
+import Link from 'next/link';
 import React, { FC, useEffect } from 'react';
 import { useInView } from "react-intersection-observer";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CatImage from '../src/components/CatImage';
 import Footer from '../src/components/layout/Footer';
 import { useSearchCats } from '../src/hooks';
 import { ICat } from '../src/interfaces';
+import { RootState } from '../src/reducers';
 import { addLikedCat } from '../src/slices/catsSlice';
-import Link from 'next/link';
-
+import { CatsQueryKeys } from '../src/util/QueryKeys';
+ 
 const Feed: FC = () => {
     const dispatch = useDispatch();
     const { data, fetchNextPage, hasNextPage, isFetching } = useSearchCats();
+    const likedCats = useSelector((state: RootState) => state.catsSlice.likedCats);
     const { ref, inView } = useInView({ threshold: 0.1 });
   
     useEffect(() => {
@@ -26,12 +29,14 @@ const Feed: FC = () => {
         dispatch(addLikedCat({ likedCat: { id: cat.id, url: cat.url }}));
     }
 
+    // const isLiked = likedCats.find(c => c.id === "35435") ? true : false;
+
     return (
         <Box>
             {data && (
                 <SimpleGrid w="2xl" columns={[1, 2, null, 4]} spacing={4} justifyContent="center">
                     {data.pages.flat().map((cat: ICat) => (
-                        <CatImage key={cat.id} cat={cat} onClick={onLikedCatClick} />
+                        <CatImage key={cat.id} cat={cat} onClick={onLikedCatClick} isLiked={likedCats.find(c => c.id === cat.id) ?? false} />
                     ))}
 
                     {

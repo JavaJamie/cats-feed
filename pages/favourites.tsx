@@ -39,7 +39,7 @@ const FavouritesGrid: FC<{ likedCats: Array<LikedCat> }> = ({ likedCats }) => {
 
     return (
         <SimpleGrid w="2xl" columns={[1, 2, null, 4]} spacing={4} justifyContent="center">
-            {likedCats.map((cat: LikedCat) => <CatImage key={cat.id} cat={cat} onClick={onRemove} />)}
+            {likedCats.map((cat: LikedCat) => <CatImage key={cat.id} cat={cat} onClick={onRemove} isLiked={true} />)}
         </SimpleGrid>
     );
 }
