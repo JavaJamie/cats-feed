@@ -69,17 +69,9 @@ const ExerciseFour = () => {
         setGridButtonsArray(arr);
     }
 
-    const onGridNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const number = e.target.value;
-        parseInt(number) ? setGridMax(parseInt(number)) : setGridMax(6); // Update the grid max buttons to render. If 0 or empty then default to 6
-    }
-
     return (
         <React.Fragment>
             <Heading as="h6" size="md">Exercise 4 (grid) - click first to add random button</Heading>
-            <HStack spacing={4}>
-                <Input w="auto" placeholder="Number to fill the grid" onChange={onGridNumberChange} />
-            </HStack>
             <SimpleGrid columns={[1, null, 2, 3]} spacing={4}>
                 {gridButtonsArray.map((value, index) => <ExerciseButton key={index} label={index === 0 ? "Add random" : `Button number: ${value}`} onClick={() => index === 0 && addRandomButton()} />)}
             </SimpleGrid>
