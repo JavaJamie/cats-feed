@@ -29,14 +29,12 @@ const Feed: FC = () => {
         dispatch(addLikedCat({ likedCat: { id: cat.id, url: cat.url }}));
     }
 
-    // const isLiked = likedCats.find(c => c.id === "35435") ? true : false;
-
     return (
         <Box>
             {data && (
                 <SimpleGrid w="2xl" columns={[1, 2, null, 4]} spacing={4} justifyContent="center">
                     {data.pages.flat().map((cat: ICat) => (
-                        <CatImage key={cat.id} cat={cat} onClick={onLikedCatClick} isLiked={likedCats.find(c => c.id === cat.id) ?? false} />
+                        <CatImage key={cat.id} cat={cat} onClick={onLikedCatClick} isLiked={likedCats.find(c => c.id === cat.id) ? true : false} />
                     ))}
 
                     {
