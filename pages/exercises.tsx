@@ -65,8 +65,10 @@ const ExerciseFour = () => {
         const randomNumber = Math.floor(Math.random() * (gridButtonsArray.length)); // Generate a random integer using the array length as the total.
         /** Slice the array into parts. Firstly, slice from the beginning until the index of the random number, then add the random number, and then join back the
         remainder of the array. This is better than using splice as it creates a new array rather than modifying the original **/
-        const arr = [...gridButtonsArray.slice(0, randomNumber + 1), randomNumber, ...gridButtonsArray.slice(-(gridButtonsArray.length - randomNumber - 1))];
-        setGridButtonsArray(arr);
+        // const arr = [...gridButtonsArray.slice(0, randomNumber + 1), randomNumber, ...gridButtonsArray.slice(-(gridButtonsArray.length - randomNumber - 1))];
+        const arrCopy = [...gridButtonsArray];
+        arrCopy.splice(randomNumber, 0, randomNumber);
+        setGridButtonsArray(arrCopy);
     }
 
     return (
