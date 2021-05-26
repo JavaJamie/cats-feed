@@ -26,7 +26,7 @@ const Feed: FC = () => {
 
     const onLikedCatClick = (cat: ICat) => {
         console.log("Liked cat: ", JSON.stringify(cat));
-        dispatch(addLikedCat({ likedCat: { id: cat.id, url: cat.url }}));
+        if (!likedCats.find(c => c.id === cat.id)) dispatch(addLikedCat({ likedCat: { id: cat.id, url: cat.url }}));
     }
 
     return (
